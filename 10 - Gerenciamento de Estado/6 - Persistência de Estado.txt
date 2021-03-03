@@ -1,0 +1,99 @@
+/* index.js */
+
+import React, { useState, useReducer, useCallback, useEffect } from "react";
+import ReactDOM from "react-dom";
+import counterReducer from "./state/counter/reducer";
+import * as CounterActions from "./state/counter/actions";
+
+
+function App() {
+
+	const [count, dispatch] = useReducer(
+	counterReducer,
+ 	0,
+	(defaultState) => {
+		const persistedState = JSON parse(localStorage.getItem("count"));
+		return persistedState ? persistedState : defaultState;
+	}
+	);
+	useEffect(() => {
+				localStorage.setItem("count", JSON.stringfy(count))
+			}, [count])
+	const [number, setNumber] = useState(1);
+	const handleNumberChange = useCallback(
+	(evt) => {
+		setNumber(evt.target.value)
+		},
+		[setNumber]
+	;)
+	const handleIncrease = useCallback(() => {
+		counterDispatch(CounterActions.increment(number))
+}, [counterDispatch, number] );
+	const handleDecrease = useCallback(() => {
+		counterDispatch(CounterActions.decrement(number))
+}, [counterDispatch, number] );
+	return (
+		<>
+		   <h1> Contador: {count} </h1>
+		   <input type="number" value={number} onChange={handleNumberChange} />
+		   <button onClick={handleIncrease}>Incrementar</button>
+		   <button onClick={handleDecrease}>Decrementar</button>
+		</>
+);
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* reducer.js */
+
+import * as CounterTypes from "./types.js"
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case CounterTypes.INCREMENT:
+      return state + action.payload.value;
+    case CounterTypes.DECREMENT:
+      return state - action.payload.value;
+    default:
+      throw new Error();
+  }
+}
+
+export default counterReducer;
+
+
+
+/* types.js */
+
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";
+
+
+
+/* actions.js */
+
+import * as CounterTypes from "./types.js";
+
+export const increment = { type: CounterTypes.INCREMENT};
+
+export function increment(inputValue) {
+	return{
+		type: CounterTypes.INCREMENT,
+		payload: {
+		  value: +inputValue
+	}
+	}
+}
+
+export function decrement(inputValue) {
+	return{
+		type: CounterTypes.DECREMENT,
+		payload: {
+		  value: +inputValue
+	}
+	}
+}
+
+export const decrement = { type: CounterTypes.DECREMENT};

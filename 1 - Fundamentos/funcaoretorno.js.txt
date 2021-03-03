@@ -1,0 +1,35 @@
+/*Index.js*/
+
+import React, { useCallback } from "react";
+import ReactDOM from "react-dom";
+import Button from "./Button";
+
+function App() {
+  let msg = "Mensagem!";
+  const handleClick = useCallback(txt => {
+    window.alert(txt);
+  }, []);
+  return (
+    <div>
+      <Button
+        clicked={() => {
+          handleClick(msg);
+        }}
+      />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+/*button.js*/
+
+import React from "react";
+
+function Button({ clicked }) {
+  return <button onClick={clicked}>Clique</button>;
+}
+
+export default Button;
+

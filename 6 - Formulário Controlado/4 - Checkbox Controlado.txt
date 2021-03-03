@@ -1,0 +1,32 @@
+import React, { useState, useCallback } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [code, setCode] = useState("javascript");
+  const handleChange = useCallback(
+    evt => {
+      setCode(evt.target.value);
+    },
+    [setCode]
+  );
+  const handleSubmit = useCallback(
+    evt => {
+      evt.preventDefault();
+      console.log(code);
+    },
+    [code]
+  );
+  return (
+    <form onSubmit={handleSubmit}>
+      <select value={code} onChange={handleChange}>
+        <option value="javascript">Javascript</option>
+        <option value="php">PHP</option>
+        <option value="python">Python</option>
+        <option value="c#">C#</option>
+      </select>
+      <input type="submit" value="Mostrar" />
+    </form>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

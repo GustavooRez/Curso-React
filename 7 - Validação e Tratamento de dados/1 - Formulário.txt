@@ -1,0 +1,95 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import MaskedInput from "react-text-mask";
+import "./index.css";
+
+function App() {
+	/*Uso dos destructs, para nao precisar chamar o useFormik na frente*/
+  const { getFieldProps, touched, errors, isValid, handleSubmit } = useFormik({
+   /* Valores que iremos buscar */ 
+   initialValues: {
+      email: "",
+      password: "",
+      phone: ""
+    },
+
+    /* Todos os processos de validação com YUP */
+    validationSchema: yup.object({
+      email: yup
+        .string()
+        .required("O preenchimento do email é obrigatório.")
+        .email("Preencha com um email válido"),
+      password: yup
+        .string()
+        .required("O preenchimento da senha é obrigatório.")
+        .matches(/(?=[a-zA-Z])/, "A senha deve conter ao menos uma letra.")
+        .matches(/(?=[0-9])/, "A senha deve conter ao menos um algorismo.")
+        .min(8, "A senha deve possuir ao menos 8 caracteres."),
+      phone: yup
+        .string()
+        .required("O preenchimento do telefone é obrigatório.")
+        .min(16, "O telefone deve conter ao menos 11 números.")
+    }),
+    onSubmit: values => {
+      const registerData = {
+        email: values.email.toLowerCase(),
+        password: values.password,
+        phone: values.phone
+          .replace("(", "")
+          .replace(")", "")
+          .replace(" ", "")
+          .replace("-", "")
+          .replace("-", "")
+      };
+      console.log(registerData);
+    }
+  });
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <input type="email" autoComplete="off" {...getFieldProps("email")} />
+        {touched.email && errors.email ? <small>{errors.email}</small> : null}
+      </div>
+      <div>
+        <input type="password" maxLength={20} {...getFieldProps("password")} />
+        {touched.password && errors.password ? (
+          <small>{errors.password}</small>
+        ) : null}
+      </div>
+      <div>
+        <MaskedInput
+          mask={[
+            "(",
+            /[0-9]/,
+            /[0-9]/,
+            ")",
+            " ",
+            /[0-9]/,
+            /[0-9]/,
+            /[0-9]/,
+            "-",
+            /[0-9]/,
+            /[0-9]/,
+            /[0-9]/,
+            "-",
+            /[0-9]/,
+            /[0-9]/,
+            /[0-9]/
+          ]}
+          guide={false}
+          autoComplete="off"
+          {...getFieldProps("phone")}
+        />
+	/*Ele verifica se o formulário foi tocado ou não*/
+        {touched.phone && errors.phone ? <small>{errors.phone}</small> : null}
+      </div>
+      <button type="submit" disabled={!isValid}>
+        Cadastrar
+      </button>
+    </form>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

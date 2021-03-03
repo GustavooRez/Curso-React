@@ -1,0 +1,63 @@
+/* index.js */
+
+import React, {useState, useCallback} from "react";
+import ReactDOM from "react-dom";
+import Button from "./Button/Button";
+import Square from "./Square/Square";
+
+
+
+function App()
+{
+  const [visibility, setVisibility] = useState(true);
+  const handleClick = useCallback(() => {
+		setVisibility( (prev) => { 
+		return !prev}
+	);
+	}, [ setVisibility]);
+  return (
+	<div>
+		<Button title= "Mostrar/Esconder" clicked={handleClick} />
+		<Square show={visibility} />
+	</div>
+)
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+/* Button.js */
+
+import React from "react";
+
+function Button ({ title, clicked}){
+	return <button onClick={clicked}>{title}</button>
+}
+
+export default Button;
+
+
+
+/* square.js */
+
+import React from "react";
+import styles from "./Square.module.css"
+
+function Square({show}){
+	return <div className={[styles.square, show ? styles.show : null ].join("")} />;
+}
+
+export default Square;
+
+/* Square.module.css */
+
+.square{
+	display:none;
+	width: 100px;
+	height: 100px;
+	background-color: black;
+}
+
+.show{
+	display:block;
+}

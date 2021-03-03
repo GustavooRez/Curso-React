@@ -1,0 +1,33 @@
+import React, { useState, useCallback } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [isChecked, setIsChecked] = useState(false);
+  const handleChange = useCallback(
+    evt => {
+      setIsChecked(evt.target.checked);
+    },
+    [setIsChecked]
+  );
+  const handleSubmit = useCallback(
+    evt => {
+      evt.preventDefault();
+      console.log(isChecked);
+    },
+    [isChecked]
+  );
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        id="check"
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleChange}
+      />
+      <label htmlFor="check">Não sou um robô</label>
+      <input type="submit" value="Mostrar" />
+    </form>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

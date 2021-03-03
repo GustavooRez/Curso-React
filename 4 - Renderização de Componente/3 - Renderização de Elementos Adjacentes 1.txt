@@ -1,0 +1,30 @@
+/* index.js */
+
+import React, {useState} from "react";
+import ReactDOM from "react-dom";
+import Txt2 from "./Txt2";
+
+
+function App(){
+  const txt1 = <p> Texto 1 </p>;
+
+  return[
+		<h1 key = "1"> Titulo </h1>,
+		<h2 key = "2"> Subtitulo </h2>,
+		<p key = "3"> Texto </p> 
+	];
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Txt2.js */
+
+import React from "react";
+
+function Txt2(){
+	return <p> Texto 2 </p>
+}
+
+export default Txt2;

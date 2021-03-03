@@ -1,0 +1,12 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [loading, setLoading] = useState(true);
+  setTimeout(() => {
+    setLoading(false);
+  }, 4000);
+  return <>{loading ? <p>Carregando...</p> : <h1>Bem-vindo!</h1>}</>;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

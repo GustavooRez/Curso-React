@@ -1,0 +1,28 @@
+import React, { useState, useCallback } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+
+function App() {
+  const [msg, setMsg] = useState("");
+  const handleChange = useCallback(
+    (evt) => {
+      setMsg(evt.target.value);
+    },
+    [setMsg]
+  );
+  const handleSubmit = useCallback(
+    (evt) => {
+      evt.preventDefault();
+      console.log(msg);
+    },
+    [msg]
+  );
+  return (
+    <form onSubmit={handleSubmit}>
+      <textarea rows="5" cols="50" value={msg} onChange={handleChange} />
+      <input type="submit" value="Mostrar" />
+    </form>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

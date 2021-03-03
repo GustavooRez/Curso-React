@@ -1,0 +1,18 @@
+.container{
+    position: fixed;
+    top: 140px;
+    left: 0;
+    background-color: #dff9fb;
+    width: 100%;
+    padding: 40px 60px;
+    height: calc(100vh - 220px);
+    overflow-y: scroll ;
+}
+
+.container ul {
+    width: 100%;
+    height: auto;
+    display: grid;
+    gap: 20px;
+    list-style: none;
+}

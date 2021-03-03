@@ -1,0 +1,68 @@
+
+/* Index.js */
+
+import React, { useCallback, useRef } from "react";
+import ReactDOM from "react-dom";
+import AuthProvider from "./state/Auth/Provider";
+import Main from "./Main";
+
+function App() {
+	return (
+	<AuthProvider>
+	  <Main />
+	<AuthProvider>
+  );
+}
+
+/* Main.js */
+
+import React, {useContext, useEffect} from "react";
+import AuthContext from "./state/Auth/Context";
+
+function Main() {
+	const {isLoggedIn, setIsLoggedIn} = useContext(AuthContext);
+	const handleLogin = useCallback(() => {
+		setIsLoggedIn(true)}, [setIsLoggedIn]);
+	const handleLogOut = useCallback(() => {
+		setIsLoggedIn(false)}, [setIsLoggedIn]);
+	
+	const LogInButton = <button onClick= {handleLogIn}> Login </button>
+	const LogOutButton   = <button onClick= {handleLogOut}> LogOut </button>
+
+	return (
+		<>
+		<h1> O usuário está logado? {isLoggedIn ? "Sim" : "Não" } </h1>
+		{isLoggedIn ? LogOutButton : LogInButton}
+		</>
+);
+}
+
+export default Main;
+
+
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Context.js */
+
+import { createContext } from "react";
+
+const Context = createContext();
+
+export default Context;
+
+
+
+/* Provider.js */
+
+import React, {useState} from "react";
+import AuthContext from "./Context";
+
+function Provider({children}) {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	return( <AuthContext.Provider value={{ inLoggedIn: false}}> </AuthContext.Provide>);
+}
+
+export default Provider;

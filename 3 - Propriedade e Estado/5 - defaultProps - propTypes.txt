@@ -1,0 +1,36 @@
+/* index.js */
+import React from "react";
+import ReactDOM from "react-dom";
+import Congratulation from "./Congratulation";
+
+function App()
+{
+  return <Congratulation name="" standing={1} />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Congratulation.js */
+
+import React from "react";
+import PropTypes from "prop-types";
+
+function Congratulation({ name, standing }) {
+  return (
+    <div>
+      <h1>Parabéns, {name}!</h1>
+      <h2>Você chegou na posição {standing}!</h2>
+    </div>
+  );
+}
+
+Congratulation.defaultProps = { name: "Anônimo" };
+
+Congratulation.propTypes = {
+  name: PropTypes.string,
+  standing: PropTypes.number.isRequired
+};
+
+export default Congratulation;

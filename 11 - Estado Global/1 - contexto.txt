@@ -1,0 +1,33 @@
+/* Main.js */
+
+import React from "react";
+
+function Main() {
+	return <h1> O usuário está logado? não! </h1>
+}
+
+export default Main;
+
+
+
+/* Index.js */
+
+import React, { useCallback, useRef } from "react";
+import ReactDOM from "react-dom";
+import Main from "./Main";
+
+function App() {
+	return <Main />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Context.js */
+
+import { createContext } from "react";
+
+const Context = createContext();
+
+export default Context;

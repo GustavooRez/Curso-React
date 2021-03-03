@@ -1,0 +1,98 @@
+/* index.js */
+
+import React, {useState} from "react";
+import ReactDOM from "react-dom";
+import Page from "./Page";
+import "./index.css";
+
+
+function App(){
+
+  return <Page />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* page.js */
+
+import React from "react";
+import Header from "./Header";
+import Main from "./Main";
+import Footer from "./Footer";
+
+function Page(){
+	return (
+	<>
+		<Header/>
+		<Main/>
+		<Footer/>
+	</>
+);
+}
+
+export default Page;
+
+
+/* header.js */
+
+import React from "react";
+
+
+function Header(){
+	const styles = {
+	width: "100%",
+	height: "25vh",
+	backgroundColor: "darkgray"	
+}
+	return <header style={styles}/>
+}
+
+export default Header;
+
+
+
+/* main.js */
+
+import React from "react";
+
+
+function Main(){
+	const styles = {
+	width: "100%",
+	height: "50vh",
+	backgroundColor: "lightgray"	
+}
+	return <main style={styles}/>
+}
+
+export default Main;
+
+
+
+
+/* footer.js */
+
+import React from "react";
+
+
+function Footer(){
+	const styles = {
+	width: "100%",
+	height: "25vh",
+	backgroundColor: "darkgray"	
+}
+	return <footer style={styles}/>
+}
+
+export default Footer;
+
+
+/* index.css */
+
+.{ 
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}

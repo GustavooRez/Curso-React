@@ -1,0 +1,53 @@
+/*index.js */
+
+import React, { useState } from "react";
+
+function Counter({ initialValue }) {
+  const [counter, setCounter] = useState(initialValue);
+  return (
+    <div>
+      <h1>{counter}</h1>
+      <button
+        onClick={() => {
+          setCounter(counter - 1);
+        }}
+      >
+        Decrementar
+      </button>
+      <button
+        onClick={() => {
+          setCounter(counter + 1);
+        }}
+      >
+        Incrementar
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+
+/* ColoredSquared */
+
+import React from "react";
+
+function ColoredSquare({ color }) {
+  const styles = {
+    width: "100px",
+    height: "100px",
+    backgroundColor: color
+  };
+  return <div style={styles} />;
+}
+
+export default ColoredSquare;
+
+/* ColorizerButton */
+
+import React from "react";
+
+function ColorizerButton({ title, clicked }) {
+  return <button onClick={clicked}>{title}</button>;
+}
+
+export default ColorizerButton;

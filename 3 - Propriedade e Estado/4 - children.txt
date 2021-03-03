@@ -1,0 +1,46 @@
+/* index.js */
+
+import React from "react";
+import ReactDOM from "react-dom";
+import Button from "./Button";
+import Icon from "./Icon";
+
+function App() {
+  return (
+    <Button>
+      <Icon />
+      <p>Botão</p>
+    </Button>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+/* button.js */
+
+import React from "react";
+
+function Button({ children }) {
+  return <button>{children}</button>;
+}
+
+export default Button;
+
+
+
+/* icon.js */
+
+import React from "react";
+
+function Icon() {
+  const styles = {
+    width: "20px",
+    height: "20px",
+    backgroundColor: "black",
+    borderRadius: "50%"
+  };
+  return <div style={styles} />;
+}
+
+export default Icon;

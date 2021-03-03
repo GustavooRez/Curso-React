@@ -1,0 +1,23 @@
+import React, { useCallback, useRef } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const inputName = useRef(null);
+  const handleSubmit = useCallback(evt => {
+    evt.preventDefault();
+	/*Evt.preventDefault é para não recarregar a pagina enviar o form/
+    console.log(inputName.current.value);
+	/* o (inputName.current.value = "";) faz mostrar algo vazio quando é clicado no botão recarregar*/
+    inputName.current.value = "";
+  }, []);
+  return (
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="name">Nome: </label>
+	//O Ref no inputName manda o que foi digitado a variavel input
+      <input id="name" type="text" ref={inputName} autoComplete="off" />
+      <input type="submit" value="Mostrar" />
+    </form>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

@@ -1,0 +1,39 @@
+/* index.js */
+
+import React from "react";
+import ReactDOM from "react-dom";
+import Order from "./Order";
+
+const order = {
+  food: "sorvete",
+  flavor: "napolitano"
+};
+
+function App() {
+  return <Order {...order} />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* order.js */
+
+import React from "react";
+
+function Order(props) {
+  return (
+    <div>
+      <p>
+        <strong>Comida: </strong>
+        {props.food}
+      </p>
+      <p>
+        <strong>Sabor: </strong>
+        {props.flavor}
+      </p>
+    </div>
+  );
+}
+
+export default Order;

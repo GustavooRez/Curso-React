@@ -1,0 +1,29 @@
+/* index.js */
+
+import React, {useState} from "react";
+import ReactDOM from "react-dom";
+
+
+function App(){
+  const [weather, setWeather] = useState("Ensolarado");
+
+const handleClick = useCallback(() => {
+	setTimeout(() => {
+	window.alert("O clima é" + weather + "!");
+	}, 3000);
+  }, [weather]);
+	
+
+  return (
+	<div>
+		<p> O clima é {weather}! </p>	
+		<button onClick{() => {setWeather("Ensolarado");}}> Ensolarado </button>
+		<button onClick{() => {setWeather("Nublado");}}> Nublado </button>
+		<button onClick{() => {setWeather("Chuvoso");}}>Chuvoso </button>
+		<button onClick{() => {setWeather("Neve");}}> Neve </button>
+		<button onClick={handleClick}> Mostrar clima </button>
+	</div>
+);
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

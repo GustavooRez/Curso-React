@@ -1,0 +1,53 @@
+/* index.js */
+
+import React, { useState, useReducer, useCallback, useEffect } from "react";
+import ReactDOM from "react-dom";
+import counterReducer from "./state/counter/reducer";
+import * as CounterActions from "./state/counter/actions";
+
+
+function App() {
+
+	const [count, dispatch] = useReducer(counterReducer, 0);
+	const handleIncrease = useCallback(() => {
+		counterDispatch({ type: CounterTypes.INCREMENT})
+}, [counterDispatch] );
+	const handleDecrease = useCallback(() => {
+		counterDispatch({ type: CounterTypes.DECREMENT})
+}, [counterDispatch] );
+	return (
+		<>
+		   <h1> Contador: {count} </h1>
+		   <button onClick={handleIncrease}>Incrementar</button>
+		   <button onClick={handleDecrease}>Decrementar</button>
+		</>
+);
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* reducer.js */
+
+import * as CounterTypes from "./types.js"
+
+function counterReducer(state, action) {
+  switch (action.type) {
+    case CounterTypes.INCREMENT:
+      return state + 1
+    case CounterTypes.DECREMENT:
+      return state - 1
+    default:
+      throw new Error();
+  }
+}
+
+export default counterReducer;
+
+
+
+/* types.js */
+
+export const INCREMENT = "INCREMENT";
+export const DECREMENT = "DECREMENT";

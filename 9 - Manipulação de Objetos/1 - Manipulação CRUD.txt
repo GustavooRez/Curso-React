@@ -1,0 +1,54 @@
+import React, { useState, useCallback } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [search, setSearch] = useState({
+    duration: {
+      min_duration: 10,
+      max_duration: 40
+    },
+    min_rating: 4,
+    max_price: 20
+  });
+  const handleCreate = useCallback(() => {
+    let newSearch = { ...search };
+    newSearch.sort = "price";
+    setSearch(newSearch);
+  }, [search, setSearch]);
+  const handleDelete = useCallback(() => {
+    let newSearch = { ...search };
+    delete newSearch.min_rating;
+    delete newSearch.max_price;
+    setSearch(newSearch);
+  }, [search, setSearch]);
+  const handleUpdate = useCallback(() => {
+    let newSearch = { ...search };
+    newSearch.duration = { ...search.duration };
+    newSearch.duration.min_duration = 20;
+    newSearch.duration.max_duration = 60;
+    setSearch(newSearch);
+  }, [search, setSearch]);
+  return (
+    <>
+      {search.duration && (
+        <p>
+          Duração entre {search.duration.min_duration} e{" "}
+          {search.duration.max_duration} horas.
+        </p>
+      )}
+      {search.min_rating && (
+        <p>Avaliação mínima de {search.min_rating} estrelas.</p>
+      )}
+      {search.max_price && <p>Preço máximo de R$ {search.max_price},00.</p>}
+      {search.sort && <p>Ordenando pelo {search.sort}.</p>}
+      <button onClick={handleCreate}>Adicionar parâmetro</button>
+      <br />
+      <button onClick={handleDelete}>Remover parâmetro</button>
+      <br />
+      <button onClick={handleUpdate}>Alterar parâmetro</button>
+    </>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+

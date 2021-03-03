@@ -1,0 +1,20 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+
+function App() {
+  const [status, setState] = useState("Não");
+  return (
+    <div>
+      <p>O botão foi clicado? {status}</p>
+      <button
+        onClick={() => {
+          setState("Sim");
+        }}
+      >
+        Clique
+      </button>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

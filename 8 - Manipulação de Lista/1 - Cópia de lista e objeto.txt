@@ -1,0 +1,36 @@
+/*Método na qual eles vão ser sempre iguais*/
+
+let oldState = ["Js", "PHP", "Python"];
+let newState = oldState;
+
+newState.push("C#");
+
+console.log("Velho 'state': " + oldState); 
+console.log("Novo 'state': " + newState);
+
+
+
+/* Métodos que são independetes agora */
+
+
+let oldState = ["Js", "PHP", "Python"];
+let newState = [...oldState];
+
+newState.push("C#");
+
+console.log("Velho 'state': " + oldState); 
+console.log("Novo 'state': " + newState);
+
+
+/* Métodos que são independetes agora outro exemplo */
+
+let oldState = {name: "Lucas", age:24};
+let newState = {...oldState};
+
+newState.name= "Joana";
+newState.age = "21";
+
+console.log("Velho 'state': " + oldState.name + "/" + oldState.age); 
+console.log("Novo 'state': " + oldState.name + "/" + oldState.age); 
+
+

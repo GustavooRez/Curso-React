@@ -1,0 +1,33 @@
+.calendar {
+  background-color: transparent;
+  width: 90%;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.calendar_padding {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 15px;
+  margin: 2%;
+  padding: 2%;
+}
+
+.calendar:hover {
+  background-color: #f8f8f8;
+}
+
+.calendar_item {
+  border-radius: 10px;
+  padding: 1%;
+}
+
+.calendar_padding:hover {
+  background-color: #9ab5fb;
+}
+
+.index{
+  z-index: 10000;
+}

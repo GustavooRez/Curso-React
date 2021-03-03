@@ -1,0 +1,41 @@
+/* Index.js*/
+
+import React from "react";
+import ReactDOM from "react-dom";
+import Square from "./Square/Square";
+
+function App() {
+  return <Square />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+/*square.js*/
+
+import React from "react";
+import styles from "./Square.module.css";
+
+function Square() {
+  let shouldBeASquare = true;
+  return (
+    <div
+      className={[shouldBeASquare ? styles.shape : null, styles.color].join(
+        " "
+      )}
+    />
+  );
+}
+
+export default Square;
+
+
+/*square.module.css*/
+
+.shape {
+  width: 100px;
+  height: 100px;
+}
+.color {
+  background-color: black;
+}

@@ -1,0 +1,65 @@
+import React, { useState, useCallback } from "react";
+import ReactDOM from "react-dom";
+import uuidv4 from "uuid/v4";
+
+function App() {
+  const [games, setGames] = useState([
+    { id: uuidv4(), title: "Guitar Hero", release: 2005 },
+    { id: uuidv4(), title: "GTA: San Andreas", release: 2004 },
+    { id: uuidv4(), title: "Resident Evil 4", release: 2005 },
+    { id: uuidv4(), title: "Shadow of the Colossus", release: 2005 },
+    { id: uuidv4(), title: "God of War II", release: 2007 },
+    { id: uuidv4(), title: "Dragon Ball Z: Budokai 3", release: 2004 },
+    { id: uuidv4(), title: "Onimusha 3: Demon Siege", release: 2004 },
+    { id: uuidv4(), title: "Call of Duty 3", release: 2006 },
+    { id: uuidv4(), title: "Gran Turismo 4", release: 2004 }
+  ]);
+  const handleCreate = useCallback(() => {
+    setGames(games.concat({ id: uuidv4(), title: "Black", release: 2006 }));
+  }, [games, setGames]);
+  const handleUpdate = useCallback(() => {
+    setGames(
+      games.map((cur) => {
+        if (cur.id === "1") {
+          return { ...cur, title: "GTA III" };
+        } else {
+          return cur;
+        }
+      })
+    );
+  }, [games, setGames]);
+  const handleDelete = useCallback(() => {
+    setGames(
+      games.filter((cur) => {
+        return cur.id !== "7";
+      })
+    );
+  }, [games, setGames]);
+  return (
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Lançamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {games.map((cur) => {
+            return (
+              <tr key={cur.id}>
+                <td>{cur.title}</td>
+                <td>{cur.release}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <button onClick={handleCreate}>Add game</button>
+      <button onClick={handleUpdate}>Toggle game</button>
+      <button onClick={handleDelete}>Remove game</button>
+    </>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));

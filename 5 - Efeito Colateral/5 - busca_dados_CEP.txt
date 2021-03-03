@@ -1,0 +1,106 @@
+/* index.js */
+
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import Loader from "./Loader";
+import PostalCodeTable from "./PostalCodeTable";
+
+function App() {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  function fetchData() {
+    fetch("https://cep.awesomeapi.com.br/json/05424020")
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        setData(res);
+      });
+  }
+  useEffect(() => {
+    fetchData();
+  }, []);
+  useEffect(() => {
+    if (data) {
+      setIsLoading(false);
+    }
+  }, [data]);
+  return isLoading ? <Loader /> : <PostalCodeTable {...data} />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/*  postalcodetable.ps */
+
+import React from "react";
+
+function PostalCodeTable({ cep, address, district, city, state }) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>CEP</th>
+          <th>Endereço</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{cep}</td>
+          <td>{address}</td>
+          <td>{district}</td>
+          <td>{city}</td>
+          <td>{state}</td>
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
+export default PostalCodeTable;
+
+
+
+/* loader.js */
+
+import React from "react";
+import "./Loader.css";
+
+function Loader() {
+  return <div className="lds-dual-ring" />;
+}
+
+export default Loader;
+
+
+/* loarder.css */
+
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #000;
+  border-color: #000 transparent #000 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,30 @@
+/*Index*/
+
+import React from "react";
+import ReactDOM from "react-dom";
+import Square from "./Square/Square";
+
+function App() {
+  return <Square />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+/* Square.js */
+import React from "react";
+import "./Square.css";
+
+function Square() {
+  return <div className="square" />;
+}
+
+export default Square;
+
+
+
+/*square.css*/
+.square {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+}

@@ -1,0 +1,12 @@
+.container{
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    background-color: #4834d4;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    
+}

@@ -1,0 +1,30 @@
+/* Index.js */
+
+import React from "react";
+import ReactDOM from "react-dom";
+import Input from "./Input";
+
+function App() {
+  return <Input category="textarea" rows={10} cols={50} />;
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Input.js */
+
+import React from "react";
+
+function Input(props) {
+  switch (props.category) {
+    case "input":
+      return <input {...props} />;
+    case "textarea":
+      return <textarea {...props} />;
+    default:
+      return <input {...props} />;
+  }
+}
+
+export default Input;

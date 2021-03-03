@@ -1,0 +1,52 @@
+
+/* Index.js */
+
+import React, { useCallback, useRef } from "react";
+import ReactDOM from "react-dom";
+import AuthProvider from "./state/Auth/Provider";
+import Main from "./Main";
+
+function App() {
+	return (
+	<AuthProvider>
+	  <Main />
+	<AuthProvider>
+  );
+}
+
+/* Main.js */
+
+import React from "react";
+
+function Main() {
+	return <h1> O usuário está logado? não! </h1>
+}
+
+export default Main;
+
+
+
+ReactDOM.render(<App />, document.getElementById("root"));
+
+
+
+/* Context.js */
+
+import { createContext } from "react";
+
+const Context = createContext();
+
+export default Context;
+
+
+
+/* Provider.js */
+
+import React from "react";
+import AuthContext from "./Context";
+
+function Provider({children}) {
+	return( <AuthContext.Provider value={{ inLoggedIn: false}}> </AuthContext.Provide>);
+}
+
+export default Provider;
